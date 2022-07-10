@@ -113,8 +113,7 @@ void _deleteTransaction(String id){
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    final appBar = AppBar(
         title: Text('Expense track'),
         actions: [
           IconButton(
@@ -122,14 +121,26 @@ void _deleteTransaction(String id){
             icon: Icon(Icons.add)
             )
         ],
-      ),
+      );
+    return Scaffold(
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Chart(_recentTransaction),
-            TransactionList(_userTransactions, _deleteTransaction),     
+            Container(
+              height: (MediaQuery.of(context).size.height - 
+              appBar.preferredSize.height -
+               MediaQuery.of(context).padding.top) * 0.25,
+              child: Chart(_recentTransaction)
+              ),
+            Container(
+              height: (MediaQuery.of(context).size.height - 
+              appBar.preferredSize.height - 
+               MediaQuery.of(context).padding.top) * 0.75,
+              child: TransactionList(_userTransactions, _deleteTransaction)
+              ),     
           ],
         ),
       ),
