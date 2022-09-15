@@ -1,6 +1,4 @@
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
-
 import './widgets/new_transaction.dart';
 import './widgets/transaction_list.dart';
 import './widgets/chart.dart';
@@ -125,11 +123,7 @@ void _deleteTransaction(String id){
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
-    final PreferredSizeWidget appBar = Platform.isIOS 
-    ? CupertinoNavigationBar(
-      middle: Text('Expense track'),
-    ) 
-    : AppBar(
+    final appBar = AppBar(
         title: Text('Expense track'),
         actions: [
           IconButton(
@@ -145,8 +139,10 @@ void _deleteTransaction(String id){
                mediaQuery.padding.top) * 0.7,
               child: TransactionList(_userTransactions, _deleteTransaction)
               );
-            
-    final pageBody = SingleChildScrollView(
+
+    return Scaffold(
+      appBar: appBar,
+      body: SingleChildScrollView(
         child: Column(
          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -183,13 +179,7 @@ void _deleteTransaction(String id){
               ): txListWidget     
           ],
         ),
-      );
-
-    return Platform.isIOS 
-    ? CupertinoPageScaffold(child: pageBody, navigationBar: appBar) 
-    : Scaffold(
-      appBar: appBar,
-      body: pageBody,
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Platform.isIOS 
       ? Container() 
