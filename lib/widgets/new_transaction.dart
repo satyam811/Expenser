@@ -56,59 +56,66 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-            elevation: 5,
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  TextField(
-                    controller: _titleController,
-                    decoration: InputDecoration(
-                      labelText: 'Title'
-                    ),
-                    onSubmitted: (_) => _submitData(),
-                    // onChanged: (val){
-                    //   titleInput = val;
-                    // },
+    return SingleChildScrollView(
+      child: Card(
+              elevation: 5,
+              child: Container(
+                padding: EdgeInsets.only(
+                  top: 10,
+                  left: 10,
+                  right: 10,
+                  bottom: MediaQuery.of(context).viewInsets.bottom + 10,
                   ),
-                  TextField(
-                    controller: _amountController,
-                    decoration: InputDecoration(
-                      labelText: 'Amount'
-                    ),
-                    keyboardType: TextInputType.number,
-                    onSubmitted: (_) => _submitData(),
-                   // onChanged: (val) => amountInput = val ,
-                  ),
-                  Container(
-                    height: 70,
-                    child: Row(children: [
-                      Expanded(
-                        child: Text(
-                          _selectedDate == null ? 
-                          'No date chosen!' : 
-                          'Picked Date: ${DateFormat.yMd().format(_selectedDate!)}',
-                          ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    TextField(
+                      controller: _titleController,
+                      decoration: InputDecoration(
+                        labelText: 'Title'
                       ),
-                      FlatButton(
-                        onPressed: _presentDatepicker, 
-                        textColor: Theme.of(context).primaryColor,
-                        child: Text('choose Date',style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),)),
-                    ],),
-                  ),
-                  RaisedButton(
-                    onPressed: _submitData, 
-                    child: Text('Add Transaction'),
-                    color: Theme.of(context).primaryColor,
-                    textColor: Colors.white,
+                      onSubmitted: (_) => _submitData(),
+                      // onChanged: (val){
+                      //   titleInput = val;
+                      // },
                     ),
-                ],
+                    TextField(
+                      controller: _amountController,
+                      decoration: InputDecoration(
+                        labelText: 'Amount'
+                      ),
+                      keyboardType: TextInputType.number,
+                      onSubmitted: (_) => _submitData(),
+                     // onChanged: (val) => amountInput = val ,
+                    ),
+                    Container(
+                      height: 70,
+                      child: Row(children: [
+                        Expanded(
+                          child: Text(
+                            _selectedDate == null ? 
+                            'No date chosen!' : 
+                            'Picked Date: ${DateFormat.yMd().format(_selectedDate!)}',
+                            ),
+                        ),
+                        FlatButton(
+                          onPressed: _presentDatepicker, 
+                          textColor: Theme.of(context).primaryColor,
+                          child: Text('choose Date',style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),)),
+                      ],),
+                    ),
+                    RaisedButton(
+                      onPressed: _submitData, 
+                      child: Text('Add Transaction'),
+                      color: Theme.of(context).primaryColor,
+                      textColor: Colors.white,
+                      ),
+                  ],
+                ),
               ),
             ),
-          );
+    );
   }
 }
